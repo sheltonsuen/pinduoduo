@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useMutation, useQueryLoader } from "react-relay";
 import styled from "styled-components";
 import { createAccount, queryAccounts } from "../api/accounts";
-import { AccountList } from "./AccountList";
+import { AccountList } from "../components/AccountList";
 
 export const Accounts = () => {
   const [modalVisible, setModalVisible] = useState(false);

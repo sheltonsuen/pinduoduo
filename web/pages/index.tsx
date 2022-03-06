@@ -1,14 +1,9 @@
-import {
-  AlertOutlined,
-  AppstoreAddOutlined,
-  LineChartOutlined,
-  UsergroupAddOutlined,
-} from "@ant-design/icons";
+import { AppstoreAddOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Accounts } from "../components/Accounts";
+import { Accounts } from "./Accounts";
 import { NavBar } from "../components/NavBar";
 import { Gray } from "../styles/color";
 import { getSelectedMenuFromPath } from "../utils/route";
@@ -41,25 +36,11 @@ export const Home = () => {
               账户管理
             </Menu.Item>
             <Menu.Item
-              key="projects"
-              icon={<LineChartOutlined />}
-              onClick={() => history.push("/projects")}
-            >
-              时序预测
-            </Menu.Item>
-            <Menu.Item
-              key="services"
+              key="orders"
               icon={<AppstoreAddOutlined />}
-              onClick={() => history.push("/publications")}
+              onClick={() => history.push("/orders")}
             >
-              应用管理
-            </Menu.Item>
-            <Menu.Item
-              key="optimus"
-              icon={<AlertOutlined />}
-              onClick={() => history.push("/optimus/tasks")}
-            >
-              优化引擎
+              订单管理
             </Menu.Item>
           </Menu>
         </RightSider>
