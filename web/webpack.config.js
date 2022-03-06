@@ -123,9 +123,13 @@ module.exports = function config(env, options) {
       rules: [
         // Handle node_modules packages that contain sourcemaps
         {
+          test: /\.css$/i,
+          use: ["style-loader", "css-loader", "sass-loader"],
+        },
+        {
           enforce: "pre",
           exclude: /@babel(?:\/|\\{1,2})runtime/,
-          test: /\.(js|mjs|jsx|ts|tsx|css)$/,
+          test: /\.(js|mjs|jsx|ts|tsx)$/,
           use: "source-map-loader",
         },
         {

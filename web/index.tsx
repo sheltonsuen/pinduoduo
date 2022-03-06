@@ -1,6 +1,7 @@
 /* SPDX-FileCopyrightText: 2016-present Kriasoft <hello@kriasoft.com> */
 /* SPDX-License-Identifier: MIT */
 
+import "antd/dist/antd.css";
 import history from "history/browser";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
