@@ -11,7 +11,6 @@
     "web"
   ],
   "scripts": {
-    "postinstall": "husky install",
     "start": "yarn workspaces foreach -ip run start",
     "build": "yarn workspaces foreach -p run build",
     "lint": "eslint --cache --report-unused-disable-directives .",
@@ -49,7 +48,6 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "graphql-config": "^4.1.0",
-    "husky": "^7.0.4",
     "jest": "^27.5.1",
     "minimist": "^1.2.5",
     "prettier": "^2.5.1",

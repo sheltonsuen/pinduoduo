@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
 import { Group } from "@mui/icons-material";
 import { ListItemIcon, ListItemText, MenuItem, MenuList } from "@mui/material";
+import styled from "styled-components";
 import { HomeContent } from "../routes/Home";
 
 type SideBarProps = {
