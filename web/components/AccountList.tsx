@@ -42,7 +42,11 @@ export const AccountList = ({ reference }: AccountListProps) => {
         <List.Item
           extra={
             item.status !== "loged" && (
-              <Button disabled={loading} onClick={() => login(item.phone)}>
+              <Button
+                disabled={loading}
+                loading={loading}
+                onClick={() => login(item.phone)}
+              >
                 登录
               </Button>
             )

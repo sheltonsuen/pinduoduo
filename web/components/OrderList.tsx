@@ -46,6 +46,7 @@ export const OrderList = ({ reference }: OrderListProps) => {
             item.status !== "loged" && (
               <Button
                 disabled={loading}
+                loading={loading}
                 onClick={() => handleAutoOrder(item.no)}
               >
                 下单
