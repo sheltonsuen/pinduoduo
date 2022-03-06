@@ -45,8 +45,8 @@ export async function up(db: Knex) {
     table.boolean("email_verified").notNullable().defaultTo(false);
     table.string("password", 100); // Argon2 hash string
     table.string("name", 50); // Display name
-    table.string("given_name", 50);
-    table.string("family_name", 50);
+    table.string("first_name", 50);
+    table.string("last_name", 50);
     // Profile picture, e.g. { filename: "/u/abc.jpg", width: 60, height: 60, version: 1 }
     table.jsonb("picture").notNullable().defaultTo("{}");
     table.string("time_zone", 50); // E.g. "America/New_York"
