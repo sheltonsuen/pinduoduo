@@ -10,8 +10,9 @@ import {
   GraphQLString,
 } from "graphql";
 import "knex";
+import { automationOrder } from "../automation/order";
 import { Context } from "../context";
-import db from "../db";
+import db, { Account, Order } from "../db";
 import { OrderType } from "../types/order";
 import { validate, ValidationError } from "../utils";
 
@@ -67,11 +68,23 @@ export const autoOrder: GraphQLFieldConfig<unknown, Context> = {
 
     if (dryRun) return { user: null };
 
-    const [order] = await db
-      .table("orders")
-      .where("no", "=", data.no as string)
+    const accounts = await db
+      .table<Account>("accounts")
+      .where("status", "=", "loged")
       .returning("*");
 
+    // TODO: choose one
+    const account =
+      accounts[Math.floor(Math.random() * accounts.length) % accounts.length];
+
+    const [order] = await db
+      .table<Order>("orders")
+      .where("no", "=", data.no as string)
+      .select();
+
+    console.log(">>>", accounts, account);
+
+    await automationOrder(account, order);
     console.log(order);
 
     return { order };
