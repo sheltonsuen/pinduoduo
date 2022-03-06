@@ -23,6 +23,9 @@ type Root {
   """The authenticated user."""
   me: User
 
+  """Fetches accounts."""
+  orders: [Order]
+
   """Fetches a user account by username or email."""
   user(username: String, email: String): User
 
@@ -98,6 +101,18 @@ enum IdentityProvider {
   Yahoo
   GameCenter
   PlayGames
+}
+
+"""The registered account."""
+type Order implements Node {
+  """The ID of an object"""
+  id: ID!
+  no: String
+  name: String
+  amount: Int
+  price: Float
+  trackNo: String
+  status: String
 }
 
 """A connection to a list of items."""
@@ -205,18 +220,6 @@ input CreateAccountInput {
 
 type CreateOrderPayload {
   order: Order
-}
-
-"""The registered account."""
-type Order implements Node {
-  """The ID of an object"""
-  id: ID!
-  no: String
-  name: String
-  amount: Int
-  price: Float
-  trackNo: String
-  status: String
 }
 
 input CreateOrderInput {

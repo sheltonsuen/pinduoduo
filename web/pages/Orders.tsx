@@ -1,28 +1,19 @@
 import { Button, Card, Input, Modal } from "antd";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQueryLoader } from "react-relay";
 import styled from "styled-components";
-import { createAccount, queryAccounts } from "../api/accounts";
-import { AccountList } from "../components/AccountList";
+import { createAccount } from "../api/accounts";
+import { queryOrders } from "../api/orders";
+import { OrderList } from "../components/OrderList";
 
 export const Orders = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [ref, loadAccounts] = useQueryLoader(queryAccounts);
-  const [phone, setPhone] = useState<string>("");
+  const [ref, loadOrders] = useQueryLoader(queryOrders);
 
   const [fetch] = useMutation(createAccount);
 
-  const handleSubmit = useCallback(() => {
-    fetch({
-      variables: {
-        input: { userId: "fake_id", phone },
-      },
-      onCompleted: () => setModalVisible(false),
-    });
-  }, [phone]);
-
   useEffect(() => {
-    loadAccounts({});
+    loadOrders({});
   }, []);
 
   return (
@@ -40,21 +31,17 @@ export const Orders = () => {
           </Button>
         </ActionsWrapper>
         <React.Suspense fallback="Loading">
-          {!!ref && <AccountList reference={ref}></AccountList>}
+          {!!ref && <OrderList reference={ref}></OrderList>}
         </React.Suspense>
         <Modal
           title="导入数据"
           visible={modalVisible}
           onCancel={() => {
             setModalVisible(false);
-            loadAccounts({});
+            loadOrders({});
           }}
-          onOk={handleSubmit}
         >
-          <Input
-            placeholder="输入手机号码"
-            onChange={(v) => setPhone(v.target.value.trim())}
-          />
+          <Input placeholder="输入手机号码" />
         </Modal>
       </Wrapper>
     </Card>

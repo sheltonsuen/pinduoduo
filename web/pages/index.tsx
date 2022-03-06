@@ -1,6 +1,6 @@
 import { AppstoreAddOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { NavBar } from "../components/NavBar";
@@ -11,7 +11,14 @@ import { Orders } from "./Orders";
 
 export const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [selected, setSelected] = useState<string[]>();
   const history = useHistory();
+
+  useEffect(() => {
+    return history.listen(() =>
+      setSelected(getSelectedMenuFromPath("accounts")),
+    );
+  }, []);
 
   return (
     <>
@@ -26,7 +33,7 @@ export const Home = () => {
         >
           <Menu
             mode="inline"
-            selectedKeys={getSelectedMenuFromPath("datasets")}
+            selectedKeys={selected}
             style={{ borderRight: 0 }}
           >
             <Menu.Item

@@ -3,5 +3,6 @@
 
 export * from "./accounts";
 export * from "./me";
+export * from "./orders";
 export * from "./user";
 export * from "./users";
