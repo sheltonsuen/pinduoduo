@@ -3,10 +3,11 @@ import { Layout, Menu } from "antd";
 import { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Accounts } from "./Accounts";
 import { NavBar } from "../components/NavBar";
 import { Gray } from "../styles/color";
 import { getSelectedMenuFromPath } from "../utils/route";
+import { Accounts } from "./Accounts";
+import { Orders } from "./Orders";
 
 export const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -48,6 +49,7 @@ export const Home = () => {
           <Content>
             <Switch>
               <Route exact path="/accounts" component={Accounts} />
+              <Route exact path="/orders" component={Orders} />
               <Route exact path="/" component={Accounts} />
             </Switch>
           </Content>
