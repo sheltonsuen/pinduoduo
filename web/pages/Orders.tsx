@@ -32,12 +32,18 @@ export const Orders = () => {
           <Button type="primary" onClick={() => setModalVisible(true)}>
             导入订单
           </Button>
+          <Button
+            style={{ marginRight: 8 }}
+            onClick={() => setModalVisible(true)}
+          >
+            清除所有
+          </Button>
         </ActionsWrapper>
         <React.Suspense fallback="Loading">
           {!!ref && <AccountList reference={ref}></AccountList>}
         </React.Suspense>
         <Modal
-          title="添加用户"
+          title="导入数据"
           visible={modalVisible}
           onCancel={() => {
             setModalVisible(false);
