@@ -159,6 +159,9 @@ type Mutation {
   """Clears authentication session"""
   signOut: String
 
+  """Creates a new"""
+  autoOrder(input: AutoOrderInput, dryRun: Boolean! = false): AutoOrderPayload
+
   """Creates a new account"""
   createAccount(input: CreateAccountInput, dryRun: Boolean! = false): CreateAccountPayload
 
@@ -206,6 +209,14 @@ input SignInInput {
 
   """User's password"""
   password: String
+}
+
+type AutoOrderPayload {
+  order: Order
+}
+
+input AutoOrderInput {
+  no: String
 }
 
 type CreateAccountPayload {

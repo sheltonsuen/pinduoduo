@@ -3,6 +3,7 @@
 
 export * from "./accountLogin";
 export * from "./auth";
+export * from "./autoOrder";
 export * from "./createAccount";
 export * from "./createOrder";
 export * from "./createUser";
