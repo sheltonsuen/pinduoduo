@@ -41,7 +41,7 @@ export const Accounts = () => {
           visible={modalVisible}
           onCancel={() => {
             setModalVisible(false);
-            loadAccounts({});
+            document.location.reload();
           }}
           onOk={handleSubmit}
         >
