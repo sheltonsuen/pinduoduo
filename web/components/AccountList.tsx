@@ -1,4 +1,4 @@
-import { Button, List } from "antd";
+import { Avatar, Button, List } from "antd";
 import { useCallback } from "react";
 import { useMutation, usePreloadedQuery } from "react-relay";
 import styled from "styled-components";
@@ -35,29 +35,27 @@ export const AccountList = ({ reference }: AccountListProps) => {
   );
 
   return (
-    <List>
-      {res?.accounts?.map((account, i) => {
-        return (
-          <List.Item key={account?.id}>
-            <LineWrapper>
-              <em style={{ marginRight: 8 }}>{i + 1}.</em>
-              <span
-                style={{ marginRight: 8 }}
-              >{`电话号码: ${account?.phone}`}</span>
-              <span>{account?.status === "loged" ? "已登录" : "未登录"}</span>
-              {!account?.status && (
-                <Button
-                  disabled={loading}
-                  onClick={() => login(account?.phone ?? "")}
-                >
-                  登录
-                </Button>
-              )}
-            </LineWrapper>
-          </List.Item>
-        );
-      })}
-    </List>
+    <List
+      itemLayout="horizontal"
+      dataSource={res.accounts as Account[]}
+      renderItem={(item, i) => (
+        <List.Item
+          extra={
+            item.status !== "loged" && (
+              <Button disabled={loading} onClick={() => login(item.phone)}>
+                登录
+              </Button>
+            )
+          }
+        >
+          <List.Item.Meta
+            avatar={<Avatar>{i + 1}</Avatar>}
+            title={item.phone}
+            description={item.status === "loged" ? "已登录" : "未登录"}
+          />
+        </List.Item>
+      )}
+    />
   );
 };
 
