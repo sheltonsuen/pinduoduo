@@ -17,6 +17,9 @@ type Root {
     ids: [ID!]!
   ): [Node]!
 
+  """Fetches accounts."""
+  accounts: [Account]
+
   """The authenticated user."""
   me: User
 
@@ -37,6 +40,16 @@ type Root {
 interface Node {
   """The id of the object."""
   id: ID!
+}
+
+"""The registered account."""
+type Account implements Node {
+  """The ID of an object"""
+  id: ID!
+  userId: String
+  phone: String
+  data: String
+  status: String
 }
 
 """The registered user account."""
@@ -168,16 +181,6 @@ input SignInInput {
 
 type CreateAccountPayload {
   account: Account
-}
-
-"""The registered account."""
-type Account implements Node {
-  """The ID of an object"""
-  id: ID!
-  userId: String
-  phone: String
-  data: String
-  status: String
 }
 
 input CreateAccountInput {

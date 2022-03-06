@@ -12,3 +12,14 @@ export const createAccount = graphql`
     }
   }
 `;
+
+export const queryAccounts = graphql`
+  query accountsQuery {
+    accounts {
+      id
+      phone
+      data
+      status
+    }
+  }
+`;

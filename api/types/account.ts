@@ -52,5 +52,5 @@ const connection = connectionDefinitions({
   connectionFields: { totalCount: countField },
 });
 
-export const UserConnection = connection.connectionType;
-export const UserEdge = connection.edgeType;
+export const AccountConnection = connection.connectionType;
+export const AccountEdge = connection.edgeType;

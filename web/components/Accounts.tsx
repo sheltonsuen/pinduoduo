@@ -1,11 +1,13 @@
 import styled from "@emotion/styled";
 import { Button, Input, Modal } from "@mui/material";
-import { useCallback, useState } from "react";
-import { useMutation } from "react-relay";
-import { createAccount } from "../api/accounts";
+import React, { useCallback, useEffect, useState } from "react";
+import { useMutation, useQueryLoader } from "react-relay";
+import { createAccount, queryAccounts } from "../api/accounts";
+import { AccountList } from "./AccountList";
 
 export const Accounts = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [ref, loadAccounts] = useQueryLoader(queryAccounts);
   const [phone, setPhone] = useState<string>("");
 
   const [fetch] = useMutation(createAccount);
@@ -19,6 +21,10 @@ export const Accounts = () => {
     });
   }, [phone]);
 
+  useEffect(() => {
+    loadAccounts({});
+  }, []);
+
   return (
     <Wrapper>
       <ActionsWrapper>
@@ -26,6 +32,9 @@ export const Accounts = () => {
           添加账户
         </Button>
       </ActionsWrapper>
+      <React.Suspense fallback="Loading">
+        {!!ref && <AccountList reference={ref}></AccountList>}
+      </React.Suspense>
       <Modal
         open={modalVisible}
         onClose={() => setModalVisible(false)}

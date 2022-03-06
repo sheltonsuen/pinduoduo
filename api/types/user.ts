@@ -57,14 +57,14 @@ export const UserType = new GraphQLObjectType<User, Context>({
     givenName: {
       type: GraphQLString,
       resolve(self) {
-        return self.given_name;
+        return self.first_name;
       },
     },
 
     familyName: {
       type: GraphQLString,
       resolve(self) {
-        return self.family_name;
+        return self.last_name;
       },
     },
 
