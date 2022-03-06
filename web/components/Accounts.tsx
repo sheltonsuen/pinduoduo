@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useMutation, useQueryLoader } from "react-relay";
 import styled from "styled-components";
 import { createAccount, queryAccounts } from "../api/accounts";
+import { Gray } from "../styles/color";
 import { AccountList } from "./AccountList";
 
 export const Accounts = () => {
@@ -59,6 +60,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   margin: 16px 64px;
+
+  background-color: ${Gray.gray2};
 `;
 
 const ActionsWrapper = styled.div`

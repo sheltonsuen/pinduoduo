@@ -1,15 +1,16 @@
 import {
   AlertOutlined,
   AppstoreAddOutlined,
-  DatabaseOutlined,
   LineChartOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
-import { Divider, Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
 import { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Accounts } from "../components/Accounts";
-import { useHistory } from "../core";
+import { NavBar } from "../components/NavBar";
+import { Gray } from "../styles/color";
 import { getSelectedMenuFromPath } from "../utils/route";
 
 export const Home = () => {
@@ -18,6 +19,7 @@ export const Home = () => {
 
   return (
     <>
+      <NavBar />
       <Wrapper>
         <RightSider
           width={240}
@@ -26,18 +28,17 @@ export const Home = () => {
           onCollapse={(v) => setCollapsed(v)}
           defaultValue="dashboard"
         >
-          <Divider />
           <Menu
             mode="inline"
             selectedKeys={getSelectedMenuFromPath("datasets")}
             style={{ borderRight: 0 }}
           >
             <Menu.Item
-              key="datasets"
-              icon={<DatabaseOutlined />}
-              onClick={() => history.push("/datasets")}
+              key="accounts"
+              icon={<UsergroupAddOutlined />}
+              onClick={() => history.push("/accounts")}
             >
-              数据集
+              账户管理
             </Menu.Item>
             <Menu.Item
               key="projects"
@@ -65,6 +66,7 @@ export const Home = () => {
         <Content>
           <Switch>
             <Route exact path="/accounts" component={Accounts} />
+            <Route exact path="/" component={Accounts} />
           </Switch>
         </Content>
       </Wrapper>
@@ -73,19 +75,21 @@ export const Home = () => {
 };
 
 const Wrapper = styled.div`
+  display: flex;
   height: 100%;
 
-  display: flex;
+  margin-top: 64px;
 `;
 
 const RightSider = styled(Layout.Sider)`
+  padding-top: 16px;
   background-color: white;
 `;
 
 const Content = styled.div`
-  height: 100%;
-  width: 100%;
+  flex: 1;
 
   display: flex;
   overflow-y: scroll;
+  background-color: ${Gray.gray4};
 `;

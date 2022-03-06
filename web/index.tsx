@@ -2,7 +2,6 @@
 /* SPDX-License-Identifier: MIT */
 
 import "antd/dist/antd.css";
-import history from "history/browser";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import type { RecordMap } from "relay-runtime/lib/store/RelayStoreTypes";
@@ -24,6 +23,6 @@ const relay = createRelay({ records: data });
 
 // Render the top-level React component
 ReactDOM.render(
-  <App config={config} history={history} relay={relay} />,
+  <App config={config} relay={relay} />,
   document.getElementById("root"),
 );
