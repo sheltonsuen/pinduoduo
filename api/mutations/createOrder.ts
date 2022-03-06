@@ -70,6 +70,7 @@ export const createOrder: GraphQLFieldConfig<unknown, Context> = {
     // Validate and sanitize user input
     const [data, errors] = validate(input, (value) => ({
       no: value("no").notEmpty(),
+      name: value("name").notEmpty(),
       amount: value("amount").notEmpty(),
       price: value("price").notEmpty(),
     }));
