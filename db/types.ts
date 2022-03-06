@@ -44,8 +44,8 @@ export type User = {
   email_verified: boolean;
   password: string | null;
   name: string | null;
-  given_name: string | null;
-  family_name: string | null;
+  first_name: string | null;
+  last_name: string | null;
   picture: Record<string, unknown>;
   time_zone: string | null;
   locale: string | null;
