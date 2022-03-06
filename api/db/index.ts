@@ -15,6 +15,7 @@ const db = knex(config);
 
 // Extend `db.fn` with an additional functionality.
 db.fn.constructor.prototype.newUserId = createNewId(db, "user", 6);
+db.fn.constructor.prototype.newAccountId = createNewId(db, "accounts", 6);
 
 // Ensure that the database connections will be closed when
 // the Node.js process is being shut down.

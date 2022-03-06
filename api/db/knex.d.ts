@@ -7,6 +7,7 @@ declare module "knex" {
   namespace Knex {
     interface FunctionHelper {
       newUserId: (unique?: boolean) => Promise<string>;
+      newAccountId: (unique?: boolean) => Promise<string>;
     }
   }
 }

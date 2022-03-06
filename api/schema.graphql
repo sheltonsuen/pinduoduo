@@ -128,6 +128,9 @@ type Mutation {
   """Clears authentication session"""
   signOut: String
 
+  """Creates a new account"""
+  createAccount(input: CreateAccountInput, dryRun: Boolean! = false): CreateAccountPayload
+
   """Creates a new user account"""
   createUser(input: CreateUserInput, dryRun: Boolean! = false): CreateUserPayload
   getUploadURL(fileName: String!, contentType: String): String
@@ -161,6 +164,26 @@ input SignInInput {
 
   """User's password"""
   password: String
+}
+
+type CreateAccountPayload {
+  user: Account
+}
+
+"""The registered account."""
+type Account implements Node {
+  """The ID of an object"""
+  id: ID!
+  userId: String
+  phone: String
+  data: String
+  status: String
+}
+
+input CreateAccountInput {
+  userId: String
+  phone: String
+  status: String = "created"
 }
 
 type CreateUserPayload {

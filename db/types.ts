@@ -20,10 +20,19 @@ export enum UserActionType {
 }
 
 export enum Table {
+  Accounts = "accounts",
   Identity = "identity",
   User = "user",
   UserAction = "user_action",
 }
+
+export type Accounts = {
+  id: string;
+  user_id: string | null;
+  phone: string | null;
+  data: string | null;
+  status: string | null;
+};
 
 export type Identity = {
   provider: IdentityProvider;

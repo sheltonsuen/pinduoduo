@@ -2,6 +2,7 @@
 /* SPDX-License-Identifier: MIT */
 
 export * from "./auth";
+export * from "./createAccount";
 export * from "./createUser";
 export * from "./getUploadURL";
 export * from "./resetPassword";
