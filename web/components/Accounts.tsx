@@ -37,7 +37,10 @@ export const Accounts = () => {
       </React.Suspense>
       <Modal
         open={modalVisible}
-        onClose={() => setModalVisible(false)}
+        onClose={() => {
+          setModalVisible(false);
+          loadAccounts({});
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
