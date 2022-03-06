@@ -135,6 +135,9 @@ type UserEdge {
 }
 
 type Mutation {
+  """Creates a new account"""
+  accountLogin(input: AccountLoginInput, dryRun: Boolean! = false): AccountLoginPayload
+
   """Creates an authentication session"""
   signIn(input: SignInInput): SignInPayload
 
@@ -165,6 +168,14 @@ type Mutation {
 
   """Updates the user account."""
   updateUser(input: UpdateUserInput, dryRun: Boolean! = false): UpdateUserPayload
+}
+
+type AccountLoginPayload {
+  account: Account
+}
+
+input AccountLoginInput {
+  id: String
 }
 
 type SignInPayload {
