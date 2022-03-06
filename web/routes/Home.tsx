@@ -1,53 +1,43 @@
 /* SPDX-FileCopyrightText: 2016-present Kriasoft <hello@kriasoft.com> */
 /* SPDX-License-Identifier: MIT */
 
-import { Container, Link, Typography } from "@mui/material";
-import * as React from "react";
-import { useAuth, useNavigate } from "../core";
+import styled from "@emotion/styled";
+import { FunctionComponent, useState } from "react";
+import { Accounts } from "../components/Accounts";
+import { SideBar } from "../components/SideBar";
 import { type HomeQuery$data } from "../queries/HomeQuery.graphql";
 
-function Home(props: HomeQuery$data): JSX.Element {
-  const { me } = props;
-  const navigate = useNavigate();
-  const auth = useAuth();
+export enum HomeContent {
+  Accounts,
+}
 
-  const signIn = React.useCallback((event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    auth.signIn();
-  }, []);
+const ContentComp: Record<HomeContent, FunctionComponent> = {
+  [HomeContent.Accounts]: Accounts,
+};
+
+function Home(props: HomeQuery$data): JSX.Element {
+  const [content, setContent] = useState<HomeContent>();
+  const Comp = (content ? ContentComp[content] : undefined) as
+    | FunctionComponent
+    | undefined;
 
   return (
-    <Container
-      sx={{ marginTop: (x) => x.spacing(3), marginBottom: (x) => x.spacing(3) }}
-    >
-      <Typography
-        sx={{ marginTop: "32vh" }}
-        variant="h1"
-        align="center"
-        children="Welcome to React.js app!"
-        gutterBottom
-      />
-      <Typography sx={{ fontSize: "1.125rem" }} align="center">
-        {me ? (
-          <React.Fragment>
-            Check out your{" "}
-            <Link href="/settings" onClick={navigate}>
-              account settings
-            </Link>
-            .
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <Link href="/auth/google" onClick={signIn}>
-              Connect
-            </Link>{" "}
-            via your Google or Facebook account.
-          </React.Fragment>
-        )}
-      </Typography>
-    </Container>
+    <Wrapper>
+      <SideBar value={content} onChange={(v) => setContent(v)} />
+      <Content>{Comp && <Comp />}</Content>
+    </Wrapper>
   );
 }
 
 export default Home;
 export type Home = typeof Home;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+`;
+
+const Content = styled.div`
+  flex: 1;
+`;
