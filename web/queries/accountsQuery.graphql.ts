@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0d5252c464534e675fbce6e0f3696035>>
+ * @generated SignedSource<<8414cd63e8f09cbb4bf6c3fd1c242dfb>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -11,12 +11,12 @@
 import { ConcreteRequest, Query } from 'relay-runtime';
 export type accountsQuery$variables = {};
 export type accountsQuery$data = {
-  readonly accounts: {
+  readonly accounts: ReadonlyArray<{
     readonly id: string;
     readonly phone: string | null;
     readonly data: string | null;
     readonly status: string | null;
-  } | null;
+  } | null> | null;
 };
 export type accountsQuery = {
   variables: accountsQuery$variables;
@@ -31,7 +31,7 @@ var v0 = [
     "concreteType": "Account",
     "kind": "LinkedField",
     "name": "accounts",
-    "plural": false,
+    "plural": true,
     "selections": [
       {
         "alias": null,
