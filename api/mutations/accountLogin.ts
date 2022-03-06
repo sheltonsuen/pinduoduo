@@ -17,7 +17,7 @@ import { AccountType } from "../types/account";
 import { validate, ValidationError } from "../utils";
 
 type AccountLoginInput = {
-  id?: string | null;
+  phone?: string | null;
 };
 
 /**
@@ -46,7 +46,7 @@ export const accountLogin: GraphQLFieldConfig<unknown, Context> = {
       type: new GraphQLInputObjectType({
         name: "AccountLoginInput",
         fields: {
-          id: { type: GraphQLString },
+          phone: { type: GraphQLString },
         },
       }),
     },
@@ -59,7 +59,7 @@ export const accountLogin: GraphQLFieldConfig<unknown, Context> = {
 
     // Validate and sanitize user input
     const [data, errors] = validate(input, (value) => ({
-      id: value("id").notEmpty(),
+      phone: value("phone").notEmpty(),
     }));
 
     if (Object.keys(errors).length > 0) {
@@ -70,17 +70,17 @@ export const accountLogin: GraphQLFieldConfig<unknown, Context> = {
 
     const [account] = await db
       .table("accounts")
-      .where("id", "=", data.id as string)
+      .where("phone", "=", data.phone as string)
       .returning("*");
 
-    console.log(">>>>[", data.id, account);
+    console.log(">>>>[", data.phone, account);
 
     const jsonData = await login(account?.phone);
     console.log(jsonData);
 
     const [result] = await db
       .table("accounts")
-      .where("id", "=", data.id as string)
+      .where("phone", "=", data.phone as string)
       .update({ data: JSON.stringify(jsonData), status: "loged" }, "*");
 
     console.log(">>>", result);

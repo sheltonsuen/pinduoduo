@@ -22,11 +22,11 @@ export const AccountList = ({ reference }: AccountListProps) => {
   const [fetch, loading] = useMutation(accountLogin);
 
   const login = useCallback(
-    (id: string) => {
+    (phone: string) => {
       fetch({
         variables: {
           input: {
-            id,
+            phone,
           },
         },
       });
@@ -48,7 +48,7 @@ export const AccountList = ({ reference }: AccountListProps) => {
               {!account?.status && (
                 <Button
                   disabled={loading}
-                  onClick={() => login(account?.id ?? "")}
+                  onClick={() => login(account?.phone ?? "")}
                 >
                   登录
                 </Button>
