@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { Button, List, ListItem } from "@mui/material";
-import { usePreloadedQuery } from "react-relay";
+import { useCallback } from "react";
+import { useMutation, usePreloadedQuery } from "react-relay";
+import { accountLogin } from "../api/account";
 import { queryAccounts } from "../api/accounts";
 import { accountsQuery } from "../queries/accountsQuery.graphql";
 
@@ -17,6 +19,20 @@ type AccountListProps = {
 
 export const AccountList = ({ reference }: AccountListProps) => {
   const res = usePreloadedQuery<accountsQuery>(queryAccounts, reference);
+  const [fetch, loading] = useMutation(accountLogin);
+
+  const login = useCallback(
+    (id: string) => {
+      fetch({
+        variables: {
+          input: {
+            id,
+          },
+        },
+      });
+    },
+    [fetch],
+  );
 
   return (
     <List>
@@ -29,7 +45,14 @@ export const AccountList = ({ reference }: AccountListProps) => {
                 style={{ marginRight: 8 }}
               >{`电话号码: ${account?.phone}`}</span>
               <span>{account?.status === "loged" ? "登录" : "未登录"}</span>
-              {!account?.status && <Button>登录</Button>}
+              {!account?.status && (
+                <Button
+                  disabled={loading}
+                  onClick={() => login(account?.id ?? "")}
+                >
+                  登录
+                </Button>
+              )}
             </LineWrapper>
           </ListItem>
         );

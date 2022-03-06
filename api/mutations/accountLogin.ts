@@ -68,11 +68,12 @@ export const accountLogin: GraphQLFieldConfig<unknown, Context> = {
 
     if (dryRun) return { user: null };
 
-    const id = await db.fn.newAccountId();
     const [account] = await db
       .table("accounts")
       .where("id", "=", data.id as string)
       .returning("*");
+
+    console.log(">>>>[", data.id, account);
 
     const jsonData = await login(account?.phone);
     console.log(jsonData);
