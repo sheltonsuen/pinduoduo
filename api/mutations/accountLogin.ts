@@ -10,8 +10,9 @@ import {
   GraphQLString,
 } from "graphql";
 import "knex";
+import { db } from "..";
+import { login } from "../automation/login";
 import { Context } from "../context";
-import db from "../db";
 import { AccountType } from "../types/account";
 import { validate, ValidationError } from "../utils";
 
@@ -73,8 +74,16 @@ export const accountLogin: GraphQLFieldConfig<unknown, Context> = {
       .where("id", "=", data.id as string)
       .returning("*");
 
-    console.log(account);
+    const jsonData = await login(account?.phone);
+    console.log(jsonData);
 
-    return { account };
+    const [result] = await db
+      .table("accounts")
+      .where("id", "=", data.id as string)
+      .update({ data: JSON.stringify(jsonData), status: "loged" }, "*");
+
+    console.log(">>>", result);
+
+    return { account: result };
   },
 };

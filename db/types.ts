@@ -26,7 +26,7 @@ export enum Table {
   UserAction = "user_action",
 }
 
-export type Account = {
+export type Accounts = {
   id: string;
   user_id: string | null;
   phone: string;
