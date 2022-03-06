@@ -38,7 +38,7 @@ export const createAccount: GraphQLFieldConfig<unknown, Context> = {
   type: new GraphQLObjectType({
     name: "CreateAccountPayload",
     fields: {
-      user: { type: AccountType },
+      account: { type: AccountType },
     },
   }),
 

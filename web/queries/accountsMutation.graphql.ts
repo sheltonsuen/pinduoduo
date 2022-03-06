@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<bea0870fcdebffe4686d0dfc94cc2df7>>
+ * @generated SignedSource<<7acaa9eb037b2ad42fe04248b18d398d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,7 +19,7 @@ export type accountsMutation$variables = {
 };
 export type accountsMutation$data = {
   readonly createAccount: {
-    readonly user: {
+    readonly account: {
       readonly id: string;
       readonly phone: string | null;
       readonly data: string | null;
@@ -60,7 +60,7 @@ v1 = [
         "args": null,
         "concreteType": "Account",
         "kind": "LinkedField",
-        "name": "user",
+        "name": "account",
         "plural": false,
         "selections": [
           {
@@ -116,16 +116,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "5fa4cbe454fcd84e50cd04ca7b7c6885",
+    "cacheID": "303a59ab42803dd351f82de0557b4022",
     "id": null,
     "metadata": {},
     "name": "accountsMutation",
     "operationKind": "mutation",
-    "text": "mutation accountsMutation(\n  $input: CreateAccountInput!\n) {\n  createAccount(input: $input) {\n    user {\n      id\n      phone\n      data\n      status\n    }\n  }\n}\n"
+    "text": "mutation accountsMutation(\n  $input: CreateAccountInput!\n) {\n  createAccount(input: $input) {\n    account {\n      id\n      phone\n      data\n      status\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "3389b5f659949e36e236e05f38a9ccda";
+(node as any).hash = "796b2c0b47568bfa32a1a4310d814438";
 
 export default node;

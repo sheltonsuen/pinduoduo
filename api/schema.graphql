@@ -167,7 +167,7 @@ input SignInInput {
 }
 
 type CreateAccountPayload {
-  user: Account
+  account: Account
 }
 
 """The registered account."""
