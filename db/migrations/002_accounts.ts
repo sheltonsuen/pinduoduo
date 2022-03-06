@@ -12,7 +12,7 @@ export async function up(db: Knex) {
   await db.schema.createTable("accounts", (table) => {
     table.specificType("id", "short_id").notNullable().primary();
     table.string("user_id", 50);
-    table.string("phone", 50);
+    table.string("phone", 50).notNullable().unique();
     table.string("data", 50);
     table.string("status");
   });

@@ -29,7 +29,7 @@ export enum Table {
 export type Accounts = {
   id: string;
   user_id: string | null;
-  phone: string | null;
+  phone: string;
   data: string | null;
   status: string | null;
 };
