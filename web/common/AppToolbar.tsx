@@ -4,9 +4,7 @@
 import { ArrowDropDown, NotificationsNone } from "@mui/icons-material";
 import {
   AppBar,
-  AppBarProps,
   Avatar,
-  Button,
   Chip,
   IconButton,
   Link,
@@ -16,8 +14,6 @@ import {
 import * as React from "react";
 import { useAuth, useNavigate } from "../core";
 import { NotificationsMenu, UserMenu } from "../menus";
-
-type AppToolbarProps = Omit<AppBarProps, "children">;
 
 function AppToolbar(props: AppToolbarProps): JSX.Element {
   const menuAnchorRef = React.createRef<HTMLButtonElement>();
@@ -119,19 +115,7 @@ function AppToolbar(props: AppToolbarProps): JSX.Element {
             size="large"
           />
         )}
-        {!me && (
-          <Button
-            sx={{ textTransform: "none" }}
-            variant="outlined"
-            href="/auth/google"
-            color="primary"
-            onClick={handleSignIn}
-            children="Log In / Sign Up"
-          />
-        )}
       </Toolbar>
-
-      {/* Pop-up menus */}
 
       <NotificationsMenu
         anchorEl={anchorEl.notifications}
