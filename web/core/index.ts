@@ -13,7 +13,6 @@ export {
   useURLSearchParams,
 } from "./history";
 export { createRelay, toRawId } from "./relay";
-export { resolveRoute } from "./router";
 export { type Route } from "./router.types";
 export { useTheme } from "./theme";
 export { getTimeZone } from "./timeZone";

@@ -1,14 +1,14 @@
 /* SPDX-FileCopyrightText: 2016-present Kriasoft <hello@kriasoft.com> */
 /* SPDX-License-Identifier: MIT */
 
-import { Action, Update } from "history";
 import * as React from "react";
 import { Environment, RelayEnvironmentProvider } from "react-relay";
+import { BrowserRouter } from "react-router-dom";
 import type { Config } from "../config";
 import { AuthProvider, ConfigContext } from "../core";
 import { History, HistoryContext, LocationContext } from "../core/history";
 import type { RouteResponse } from "../core/router";
-import { resolveRoute } from "../core/router";
+import { Home } from "../pages";
 
 type AppProps = {
   config: Config;
@@ -29,12 +29,6 @@ class App extends React.Component<AppProps> {
 
   dispose?: () => void;
 
-  componentDidMount(): void {
-    const { history } = this.props;
-    this.dispose = history.listen(this.renderPath);
-    this.renderPath({ location: history.location, action: Action.Pop });
-  }
-
   componentDidUpdate(): void {
     if (this.state.route?.title) {
       self.document.title = this.state.route.title;
@@ -50,17 +44,6 @@ class App extends React.Component<AppProps> {
     console.error(error, errorInfo);
   }
 
-  renderPath = async (ctx: Update): Promise<void> => {
-    resolveRoute({
-      path: ctx.location.pathname,
-      query: new URLSearchParams(ctx.location.search),
-      relay: this.props.relay,
-    }).then((route) => {
-      if (route.error) console.error(route.error);
-      this.setState({ route, location: ctx.location, error: route.error });
-    });
-  };
-
   render(): JSX.Element {
     const { config, history } = this.props;
     const { route, location } = this.state;
@@ -71,9 +54,9 @@ class App extends React.Component<AppProps> {
           <AuthProvider>
             <HistoryContext.Provider value={history}>
               <LocationContext.Provider value={location}>
-                {route?.component
-                  ? React.createElement(route.component, route.props)
-                  : null}
+                <BrowserRouter>
+                  <Home />
+                </BrowserRouter>
               </LocationContext.Provider>
             </HistoryContext.Provider>
           </AuthProvider>

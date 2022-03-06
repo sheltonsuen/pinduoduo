@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { Button, Input, Modal } from "@mui/material";
+import { Button, Input, Modal } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { useMutation, useQueryLoader } from "react-relay";
+import styled from "styled-components";
 import { createAccount, queryAccounts } from "../api/accounts";
 import { AccountList } from "./AccountList";
 
@@ -28,7 +28,7 @@ export const Accounts = () => {
   return (
     <Wrapper>
       <ActionsWrapper>
-        <Button variant="contained" onClick={() => setModalVisible(true)}>
+        <Button type="primary" onClick={() => setModalVisible(true)}>
           添加账户
         </Button>
       </ActionsWrapper>
@@ -36,13 +36,11 @@ export const Accounts = () => {
         {!!ref && <AccountList reference={ref}></AccountList>}
       </React.Suspense>
       <Modal
-        open={modalVisible}
-        onClose={() => {
+        visible={modalVisible}
+        onCancel={() => {
           setModalVisible(false);
           loadAccounts({});
         }}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
         <ModalWrapper>
           <h1>创建账户</h1>
