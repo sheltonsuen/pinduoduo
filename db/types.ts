@@ -26,6 +26,16 @@ export enum Table {
   UserAction = "user_action",
 }
 
+export type Order = {
+  id: string
+  no: string
+  name: string
+  amount: number
+  price: number
+  track_no: string | null
+  status: string | null
+}
+
 export type Account = {
   id: string;
   user_id: string | null;

@@ -147,6 +147,9 @@ type Mutation {
   """Creates a new account"""
   createAccount(input: CreateAccountInput, dryRun: Boolean! = false): CreateAccountPayload
 
+  """Creates a new"""
+  createOrder(input: CreateOrderInput, dryRun: Boolean! = false): CreateOrderPayload
+
   """Creates a new user account"""
   createUser(input: CreateUserInput, dryRun: Boolean! = false): CreateUserPayload
   getUploadURL(fileName: String!, contentType: String): String
@@ -197,6 +200,31 @@ type CreateAccountPayload {
 input CreateAccountInput {
   userId: String
   phone: String
+  status: String = "created"
+}
+
+type CreateOrderPayload {
+  order: Order
+}
+
+"""The registered account."""
+type Order implements Node {
+  """The ID of an object"""
+  id: ID!
+  no: String
+  name: String
+  amount: Int
+  price: Float
+  trackNo: String
+  status: String
+}
+
+input CreateOrderInput {
+  no: String
+  name: String
+  amount: Int
+  price: Float
+  trackNo: String
   status: String = "created"
 }
 
