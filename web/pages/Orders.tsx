@@ -26,11 +26,11 @@ export const Orders = () => {
   }, []);
 
   return (
-    <Card title="所有账户" style={{ flex: 1 }}>
+    <Card title="所有订单" style={{ flex: 1 }}>
       <Wrapper>
         <ActionsWrapper>
           <Button type="primary" onClick={() => setModalVisible(true)}>
-            添加账户
+            导入订单
           </Button>
         </ActionsWrapper>
         <React.Suspense fallback="Loading">
