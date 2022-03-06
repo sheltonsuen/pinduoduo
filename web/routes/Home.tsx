@@ -17,7 +17,7 @@ const ContentComp: Record<HomeContent, FunctionComponent> = {
 
 function Home(props: HomeQuery$data): JSX.Element {
   const [content, setContent] = useState<HomeContent>();
-  const Comp = (content ? ContentComp[content] : undefined) as
+  const Comp = (content !== undefined ? ContentComp[content] : undefined) as
     | FunctionComponent
     | undefined;
 
