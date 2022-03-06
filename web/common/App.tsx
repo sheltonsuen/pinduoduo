@@ -1,8 +1,6 @@
 /* SPDX-FileCopyrightText: 2016-present Kriasoft <hello@kriasoft.com> */
 /* SPDX-License-Identifier: MIT */
 
-import { CssBaseline, PaletteMode, Toolbar } from "@mui/material";
-import { StyledEngineProvider } from "@mui/material/styles";
 import { Action, Update } from "history";
 import * as React from "react";
 import { Environment, RelayEnvironmentProvider } from "react-relay";
@@ -11,9 +9,6 @@ import { AuthProvider, ConfigContext } from "../core";
 import { History, HistoryContext, LocationContext } from "../core/history";
 import type { RouteResponse } from "../core/router";
 import { resolveRoute } from "../core/router";
-import { ThemeProvider } from "../theme";
-import { AppToolbar } from "./AppToolbar";
-import { ErrorPage } from "./ErrorPage";
 
 type AppProps = {
   config: Config;
@@ -26,9 +21,6 @@ class App extends React.Component<AppProps> {
     route: undefined as RouteResponse | undefined,
     location: this.props.history.location,
     error: undefined as Error | undefined,
-    theme: (window?.localStorage?.getItem("theme") === "dark"
-      ? "dark"
-      : "light") as PaletteMode,
   };
 
   static getDerivedStateFromError(error: Error): { error: Error } {
@@ -71,38 +63,21 @@ class App extends React.Component<AppProps> {
 
   render(): JSX.Element {
     const { config, history } = this.props;
-    const { route, location, error } = this.state;
-
-    if (error) {
-      return (
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider>
-            <ErrorPage error={error} history={history} />;
-          </ThemeProvider>
-        </StyledEngineProvider>
-      );
-    }
+    const { route, location } = this.state;
 
     return (
       <ConfigContext.Provider value={config}>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider>
-            <RelayEnvironmentProvider environment={this.props.relay}>
-              <AuthProvider>
-                <HistoryContext.Provider value={history}>
-                  <LocationContext.Provider value={location}>
-                    <CssBaseline />
-                    <AppToolbar />
-                    <Toolbar />
-                    {route?.component
-                      ? React.createElement(route.component, route.props)
-                      : null}
-                  </LocationContext.Provider>
-                </HistoryContext.Provider>
-              </AuthProvider>
-            </RelayEnvironmentProvider>
-          </ThemeProvider>
-        </StyledEngineProvider>
+        <RelayEnvironmentProvider environment={this.props.relay}>
+          <AuthProvider>
+            <HistoryContext.Provider value={history}>
+              <LocationContext.Provider value={location}>
+                {route?.component
+                  ? React.createElement(route.component, route.props)
+                  : null}
+              </LocationContext.Provider>
+            </HistoryContext.Provider>
+          </AuthProvider>
+        </RelayEnvironmentProvider>
       </ConfigContext.Provider>
     );
   }
