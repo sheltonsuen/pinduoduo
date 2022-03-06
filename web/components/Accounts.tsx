@@ -1,9 +1,8 @@
-import { Button, Input, Modal } from "antd";
+import { Button, Card, Input, Modal } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { useMutation, useQueryLoader } from "react-relay";
 import styled from "styled-components";
 import { createAccount, queryAccounts } from "../api/accounts";
-import { Gray } from "../styles/color";
 import { AccountList } from "./AccountList";
 
 export const Accounts = () => {
@@ -27,53 +26,41 @@ export const Accounts = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <ActionsWrapper>
-        <Button type="primary" onClick={() => setModalVisible(true)}>
-          添加账户
-        </Button>
-      </ActionsWrapper>
-      <React.Suspense fallback="Loading">
-        {!!ref && <AccountList reference={ref}></AccountList>}
-      </React.Suspense>
-      <Modal
-        visible={modalVisible}
-        onCancel={() => {
-          setModalVisible(false);
-          loadAccounts({});
-        }}
-      >
-        <ModalWrapper>
-          <h1>创建账户</h1>
+    <Card title="所有账户" style={{ flex: 1 }}>
+      <Wrapper>
+        <ActionsWrapper>
+          <Button type="primary" onClick={() => setModalVisible(true)}>
+            添加账户
+          </Button>
+        </ActionsWrapper>
+        <React.Suspense fallback="Loading">
+          {!!ref && <AccountList reference={ref}></AccountList>}
+        </React.Suspense>
+        <Modal
+          title="添加用户"
+          visible={modalVisible}
+          onCancel={() => {
+            setModalVisible(false);
+            loadAccounts({});
+          }}
+          onOk={handleSubmit}
+        >
           <Input
             placeholder="输入手机号码"
             onChange={(v) => setPhone(v.target.value.trim())}
           />
-          <Button onClick={handleSubmit}>确认添加</Button>
-        </ModalWrapper>
-      </Modal>
-    </Wrapper>
+        </Modal>
+      </Wrapper>
+    </Card>
   );
 };
 
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  margin: 16px 64px;
-
-  background-color: ${Gray.gray2};
 `;
 
 const ActionsWrapper = styled.div`
   display: flex;
   flex-flow: row-reverse;
-`;
-
-const ModalWrapper = styled.div`
-  padding: 16px;
-  background: white;
-
-  position: absolute;
-  top: 40vh;
-  left: 30vw;
 `;

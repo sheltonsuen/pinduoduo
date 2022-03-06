@@ -63,12 +63,14 @@ export const Home = () => {
             </Menu.Item>
           </Menu>
         </RightSider>
-        <Content>
-          <Switch>
-            <Route exact path="/accounts" component={Accounts} />
-            <Route exact path="/" component={Accounts} />
-          </Switch>
-        </Content>
+        <ContentWrapper>
+          <Content>
+            <Switch>
+              <Route exact path="/accounts" component={Accounts} />
+              <Route exact path="/" component={Accounts} />
+            </Switch>
+          </Content>
+        </ContentWrapper>
       </Wrapper>
     </>
   );
@@ -87,9 +89,15 @@ const RightSider = styled(Layout.Sider)`
 `;
 
 const Content = styled.div`
-  flex: 1;
+  margin: 0 auto;
+  width: 720px;
+  height: 100%;
 
   display: flex;
   overflow-y: scroll;
+`;
+
+const ContentWrapper = styled.div`
+  flex: 1;
   background-color: ${Gray.gray4};
 `;

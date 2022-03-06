@@ -1,6 +1,8 @@
 /* SPDX-FileCopyrightText: 2016-present Kriasoft <hello@kriasoft.com> */
 /* SPDX-License-Identifier: MIT */
 
+import { ConfigProvider } from "antd";
+import zhCN from "antd/lib/locale/zh_CN";
 import * as React from "react";
 import { Environment, RelayEnvironmentProvider } from "react-relay";
 import { BrowserRouter } from "react-router-dom";
@@ -48,12 +50,14 @@ class App extends React.Component<AppProps> {
       <ConfigContext.Provider value={config}>
         <RelayEnvironmentProvider environment={this.props.relay}>
           <AuthProvider>
-            <BrowserRouter>
-              <>
-                <GlobalStyle />
-                <Home />
-              </>
-            </BrowserRouter>
+            <ConfigProvider locale={zhCN}>
+              <BrowserRouter>
+                <>
+                  <GlobalStyle />
+                  <Home />
+                </>
+              </BrowserRouter>
+            </ConfigProvider>
           </AuthProvider>
         </RelayEnvironmentProvider>
       </ConfigContext.Provider>
