@@ -44,7 +44,7 @@ export const AccountList = ({ reference }: AccountListProps) => {
               <span
                 style={{ marginRight: 8 }}
               >{`电话号码: ${account?.phone}`}</span>
-              <span>{account?.status === "loged" ? "已u登录" : "未登录"}</span>
+              <span>{account?.status === "loged" ? "已登录" : "未登录"}</span>
               {!account?.status && (
                 <Button
                   disabled={loading}
