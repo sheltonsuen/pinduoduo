@@ -1,9 +1,10 @@
-import { Button, Card, Input, Modal } from 'antd';
+import { Button, Card } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryLoader } from 'react-relay';
 import styled from 'styled-components';
 import { createAccount } from '../api/accounts';
 import { queryOrders } from '../api/orders';
+import { ImportOrderModal } from '../components/ImportOrderModal';
 import { OrderList } from '../components/OrderList';
 
 export const Orders = () => {
@@ -37,16 +38,12 @@ export const Orders = () => {
       <React.Suspense fallback='Loading'>
         {!!ref && <OrderList reference={ref}></OrderList>}
       </React.Suspense>
-      <Modal
-        title='导入数据'
-        visible={modalVisible}
-        onCancel={() => {
-          setModalVisible(false);
-          loadOrders({});
-        }}
-      >
-        <Input placeholder='输入手机号码' />
-      </Modal>
+      {modalVisible && (
+        <ImportOrderModal
+          visible={modalVisible}
+          onCancel={() => setModalVisible(false)}
+        />
+      )}
     </Card>
   );
 };

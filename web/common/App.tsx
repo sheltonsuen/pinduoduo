@@ -8,7 +8,6 @@ import { Environment, RelayEnvironmentProvider } from 'react-relay';
 import { BrowserRouter } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import type { Config } from '../config';
-import { AuthProvider, ConfigContext } from '../core';
 import { Home } from '../pages';
 
 const GlobalStyle = createGlobalStyle`
@@ -44,23 +43,17 @@ class App extends React.Component<AppProps> {
   }
 
   render(): JSX.Element {
-    const { config } = this.props;
-
     return (
-      <ConfigContext.Provider value={config}>
-        <RelayEnvironmentProvider environment={this.props.relay}>
-          <AuthProvider>
-            <ConfigProvider locale={zhCN}>
-              <BrowserRouter>
-                <>
-                  <GlobalStyle />
-                  <Home />
-                </>
-              </BrowserRouter>
-            </ConfigProvider>
-          </AuthProvider>
-        </RelayEnvironmentProvider>
-      </ConfigContext.Provider>
+      <RelayEnvironmentProvider environment={this.props.relay}>
+        <ConfigProvider locale={zhCN}>
+          <BrowserRouter>
+            <>
+              <GlobalStyle />
+              <Home />
+            </>
+          </BrowserRouter>
+        </ConfigProvider>
+      </RelayEnvironmentProvider>
     );
   }
 }
