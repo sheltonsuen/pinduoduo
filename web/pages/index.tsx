@@ -79,6 +79,7 @@ const RightSider = styled(Layout.Sider)`
 `;
 
 const Content = styled.div`
+  padding: 16px 0;
   margin: 0 auto;
   width: 720px;
   height: 100%;
