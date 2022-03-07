@@ -1,15 +1,15 @@
 /* SPDX-FileCopyrightText: 2016-present Kriasoft <hello@kriasoft.com> */
 /* SPDX-License-Identifier: MIT */
 
-import { ConfigProvider } from "antd";
-import zhCN from "antd/lib/locale/zh_CN";
-import * as React from "react";
-import { Environment, RelayEnvironmentProvider } from "react-relay";
-import { BrowserRouter } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
-import type { Config } from "../config";
-import { AuthProvider, ConfigContext } from "../core";
-import { Home } from "../pages";
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN';
+import * as React from 'react';
+import { Environment, RelayEnvironmentProvider } from 'react-relay';
+import { BrowserRouter } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
+import type { Config } from '../config';
+import { AuthProvider, ConfigContext } from '../core';
+import { Home } from '../pages';
 
 const GlobalStyle = createGlobalStyle`
   #root {
