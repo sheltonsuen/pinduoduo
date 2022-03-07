@@ -29,11 +29,11 @@ export const Accounts = () => {
     <Card
       title='所有账户'
       style={{ flex: 1 }}
-      actions={[
+      extra={
         <Button key='add' type='primary' onClick={() => setModalVisible(true)}>
           添加账户
-        </Button>,
-      ]}
+        </Button>
+      }
     >
       <React.Suspense fallback='Loading'>
         {!!ref && <AccountList reference={ref}></AccountList>}
