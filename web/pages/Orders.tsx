@@ -23,15 +23,7 @@ export const Orders = () => {
       style={{ flex: 1 }}
       extra={
         <ActionsWrapper>
-          <Button type='primary' onClick={() => setModalVisible(true)}>
-            导入订单
-          </Button>
-          <Button
-            style={{ marginRight: 8 }}
-            onClick={() => setModalVisible(true)}
-          >
-            清除所有
-          </Button>
+          <Button style={{ marginRight: 8 }}>清除所有</Button>
         </ActionsWrapper>
       }
     >
