@@ -85,7 +85,6 @@ const Content = styled.div`
   height: 100%;
 
   display: flex;
-  overflow-y: scroll;
 `;
 
 const ContentWrapper = styled.div`
