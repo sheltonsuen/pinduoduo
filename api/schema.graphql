@@ -234,11 +234,13 @@ type CreateOrderPayload {
 }
 
 input CreateOrderInput {
-  no: String
-  name: String
+  selfNo: String
+  address: String
+  spec: String
   amount: Int
-  price: Float
-  trackNo: String
+  salesPrice: Float
+  selfStore: String
+  product: String
   status: String = "created"
 }
 

@@ -10,19 +10,21 @@ import {
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
-} from "graphql";
-import "knex";
-import { Context } from "../context";
-import db from "../db";
-import { OrderType } from "../types/order";
-import { validate, ValidationError } from "../utils";
+} from 'graphql';
+import 'knex';
+import { Context } from '../context';
+import db from '../db';
+import { OrderType } from '../types/order';
+import { validate, ValidationError } from '../utils';
 
 type CreateOrderInput = {
-  no?: string | null;
-  name?: string | null;
+  selfNo?: string | null;
+  address?: string | null;
+  spec?: string | null;
   amount?: number | null;
-  price?: number | null;
-  track_no?: number | null;
+  salesPrice?: number | null;
+  selfStore?: string | null;
+  product?: string | null;
 };
 
 /**
@@ -37,10 +39,10 @@ type CreateOrderInput = {
  *   }
  */
 export const createOrder: GraphQLFieldConfig<unknown, Context> = {
-  description: "Creates a new",
+  description: 'Creates a new',
 
   type: new GraphQLObjectType({
-    name: "CreateOrderPayload",
+    name: 'CreateOrderPayload',
     fields: {
       order: { type: OrderType },
     },
@@ -49,14 +51,16 @@ export const createOrder: GraphQLFieldConfig<unknown, Context> = {
   args: {
     input: {
       type: new GraphQLInputObjectType({
-        name: "CreateOrderInput",
+        name: 'CreateOrderInput',
         fields: {
-          no: { type: GraphQLString },
-          name: { type: GraphQLString },
+          selfNo: { type: GraphQLString },
+          address: { type: GraphQLString },
+          spec: { type: GraphQLString },
           amount: { type: GraphQLInt },
-          price: { type: GraphQLFloat },
-          trackNo: { type: GraphQLString },
-          status: { type: GraphQLString, defaultValue: "created" },
+          salesPrice: { type: GraphQLFloat },
+          selfStore: { type: GraphQLString },
+          product: { type: GraphQLString },
+          status: { type: GraphQLString, defaultValue: 'created' },
         },
       }),
     },
@@ -69,10 +73,13 @@ export const createOrder: GraphQLFieldConfig<unknown, Context> = {
 
     // Validate and sanitize user input
     const [data, errors] = validate(input, (value) => ({
-      no: value("no").notEmpty(),
-      name: value("name").notEmpty(),
-      amount: value("amount").notEmpty(),
-      price: value("price").notEmpty(),
+      self_no: value('selfNo').notEmpty(),
+      address: value('address').notEmpty(),
+      spec: value('spec').notEmpty(),
+      amount: value('amount').notEmpty(),
+      sales_price: value('salesPrice').notEmpty(),
+      self_store: value('selfStore').notEmpty(),
+      product: value('product').notEmpty(),
     }));
 
     if (Object.keys(errors).length > 0) {
@@ -83,9 +90,9 @@ export const createOrder: GraphQLFieldConfig<unknown, Context> = {
 
     const id = await db.fn.newAccountId();
     const [order] = await db
-      .table("orders")
+      .table('orders')
       .insert({ id, ...data })
-      .returning("*");
+      .returning('*');
 
     return { order };
   },
