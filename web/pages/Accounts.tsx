@@ -26,31 +26,32 @@ export const Accounts = () => {
   }, []);
 
   return (
-    <Card title="所有账户" style={{ flex: 1 }}>
-      <Wrapper>
-        <ActionsWrapper>
-          <Button type="primary" onClick={() => setModalVisible(true)}>
-            添加账户
-          </Button>
-        </ActionsWrapper>
-        <React.Suspense fallback="Loading">
-          {!!ref && <AccountList reference={ref}></AccountList>}
-        </React.Suspense>
-        <Modal
-          title="添加用户"
-          visible={modalVisible}
-          onCancel={() => {
-            setModalVisible(false);
-            document.location.reload();
-          }}
-          onOk={handleSubmit}
-        >
-          <Input
-            placeholder="输入手机号码"
-            onChange={(v) => setPhone(v.target.value.trim())}
-          />
-        </Modal>
-      </Wrapper>
+    <Card
+      title="所有账户"
+      style={{ flex: 1 }}
+      actions={[
+        <Button key="add" type="primary" onClick={() => setModalVisible(true)}>
+          添加账户
+        </Button>,
+      ]}
+    >
+      <React.Suspense fallback="Loading">
+        {!!ref && <AccountList reference={ref}></AccountList>}
+      </React.Suspense>
+      <Modal
+        title="添加用户"
+        visible={modalVisible}
+        onCancel={() => {
+          setModalVisible(false);
+          document.location.reload();
+        }}
+        onOk={handleSubmit}
+      >
+        <Input
+          placeholder="输入手机号码"
+          onChange={(v) => setPhone(v.target.value.trim())}
+        />
+      </Modal>
     </Card>
   );
 };
