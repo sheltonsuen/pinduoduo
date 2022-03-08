@@ -1,8 +1,8 @@
 import { graphql } from 'relay-runtime';
-export const autoOrder = graphql`
-  mutation ordersMutation($input: AutoOrderInput!) {
-    autoOrder(input: $input) {
-      order {
+export const scanOrders = graphql`
+  mutation ordersMutation {
+    scanOrders {
+      orders {
         id
       }
     }

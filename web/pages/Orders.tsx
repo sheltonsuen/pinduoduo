@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryLoader } from 'react-relay';
 import styled from 'styled-components';
 import { createAccount } from '../api/accounts';
-import { queryOrders } from '../api/orders';
+import { queryOrders, scanOrders } from '../api/orders';
 import { ImportOrderModal } from '../components/ImportOrderModal';
 import { OrderList } from '../components/OrderList';
 
 export const Orders = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [ref, loadOrders] = useQueryLoader(queryOrders);
+  const [scan, loading] = useMutation(scanOrders);
 
   const [fetch] = useMutation(createAccount);
 
@@ -23,7 +24,13 @@ export const Orders = () => {
       style={{ flex: 1, overflow: 'scroll' }}
       extra={
         <ActionsWrapper>
-          <Button type='primary' style={{ marginRight: 8 }}>
+          <Button
+            type='primary'
+            loading={loading}
+            disabled={loading}
+            style={{ marginRight: 8 }}
+            onClick={() => scan({ variables: {} })}
+          >
             重新扫描所有订单
           </Button>
         </ActionsWrapper>

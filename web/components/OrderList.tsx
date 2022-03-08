@@ -1,8 +1,8 @@
 import { Avatar, Button, List } from 'antd';
 import { useCallback } from 'react';
-import { useMutation, usePreloadedQuery } from 'react-relay';
+import { usePreloadedQuery } from 'react-relay';
 import styled from 'styled-components';
-import { autoOrder, queryOrders } from '../api/orders';
+import { queryOrders } from '../api/orders';
 import { ordersQuery } from '../queries/ordersQuery.graphql';
 
 type Order = {
@@ -30,20 +30,8 @@ type OrderListProps = {
 
 export const OrderList = ({ reference }: OrderListProps) => {
   const res = usePreloadedQuery<ordersQuery>(queryOrders, reference);
-  const [fetch, loading] = useMutation(autoOrder);
 
-  const handleAutoOrder = useCallback(
-    (no: string) => {
-      fetch({
-        variables: {
-          input: {
-            no,
-          },
-        },
-      });
-    },
-    [fetch],
-  );
+  const handleAutoOrder = useCallback((no: string) => null, [fetch]);
 
   return (
     <List
@@ -53,11 +41,7 @@ export const OrderList = ({ reference }: OrderListProps) => {
         <List.Item
           extra={
             item.status !== 'loged' && (
-              <Button
-                disabled={loading}
-                loading={loading}
-                onClick={() => handleAutoOrder(item.selfNo ?? '')}
-              >
+              <Button onClick={() => handleAutoOrder(item.selfNo ?? '')}>
                 下单
               </Button>
             )

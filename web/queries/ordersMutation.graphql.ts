@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1d5d3766ddb3d580da30b39f522761e5>>
+ * @generated SignedSource<<37e32295270c976b2e5b67b17489be27>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,17 +9,12 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
-export type AutoOrderInput = {
-  no?: string | null;
-};
-export type ordersMutation$variables = {
-  input: AutoOrderInput;
-};
+export type ordersMutation$variables = {};
 export type ordersMutation$data = {
-  readonly autoOrder: {
-    readonly order: {
+  readonly scanOrders: {
+    readonly orders: ReadonlyArray<{
       readonly id: string;
-    } | null;
+    } | null> | null;
   } | null;
 };
 export type ordersMutation = {
@@ -30,24 +25,11 @@ export type ordersMutation = {
 const node: ConcreteRequest = (function(){
 var v0 = [
   {
-    "defaultValue": null,
-    "kind": "LocalArgument",
-    "name": "input"
-  }
-],
-v1 = [
-  {
     "alias": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "input",
-        "variableName": "input"
-      }
-    ],
-    "concreteType": "AutoOrderPayload",
+    "args": null,
+    "concreteType": "ScanOrdersPayload",
     "kind": "LinkedField",
-    "name": "autoOrder",
+    "name": "scanOrders",
     "plural": false,
     "selections": [
       {
@@ -55,8 +37,8 @@ v1 = [
         "args": null,
         "concreteType": "Order",
         "kind": "LinkedField",
-        "name": "order",
-        "plural": false,
+        "name": "orders",
+        "plural": true,
         "selections": [
           {
             "alias": null,
@@ -74,32 +56,32 @@ v1 = [
 ];
 return {
   "fragment": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
     "name": "ordersMutation",
-    "selections": (v1/*: any*/),
+    "selections": (v0/*: any*/),
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": (v0/*: any*/),
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "ordersMutation",
-    "selections": (v1/*: any*/)
+    "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "a084063effe5acd3df227598f02b68c4",
+    "cacheID": "9427b985d0a267d568458bbd2e6e7c0a",
     "id": null,
     "metadata": {},
     "name": "ordersMutation",
     "operationKind": "mutation",
-    "text": "mutation ordersMutation(\n  $input: AutoOrderInput!\n) {\n  autoOrder(input: $input) {\n    order {\n      id\n    }\n  }\n}\n"
+    "text": "mutation ordersMutation {\n  scanOrders {\n    orders {\n      id\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "dad6c11eadca81d9a8ddaef6d671496b";
+(node as any).hash = "5ce7ac015bfd6bfaf574f022a08a0987";
 
 export default node;
