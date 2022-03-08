@@ -1,4 +1,4 @@
-import { Avatar, Button, List } from 'antd';
+import { Avatar, List } from 'antd';
 import { useCallback } from 'react';
 import { usePreloadedQuery } from 'react-relay';
 import styled from 'styled-components';
@@ -38,15 +38,7 @@ export const OrderList = ({ reference }: OrderListProps) => {
       itemLayout='horizontal'
       dataSource={res.orders as unknown as Order[]}
       renderItem={(item, i) => (
-        <List.Item
-          extra={
-            item.status !== 'loged' && (
-              <Button onClick={() => handleAutoOrder(item.selfNo ?? '')}>
-                下单
-              </Button>
-            )
-          }
-        >
+        <List.Item>
           <List.Item.Meta
             avatar={<Avatar>{i + 1}</Avatar>}
             title={`订单号: ${item.selfNo}`}

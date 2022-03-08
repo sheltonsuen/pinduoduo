@@ -168,7 +168,7 @@ type Mutation {
   signOut: String
 
   """Creates a new"""
-  autoOrder(input: AutoOrderInput, dryRun: Boolean! = false): AutoOrderPayload
+  autoOrder: AutoOrderPayload
 
   """Creates a new account"""
   createAccount(input: CreateAccountInput, dryRun: Boolean! = false): CreateAccountPayload
@@ -223,11 +223,7 @@ input SignInInput {
 }
 
 type AutoOrderPayload {
-  order: Order
-}
-
-input AutoOrderInput {
-  no: String
+  orders: [Order]
 }
 
 type CreateAccountPayload {

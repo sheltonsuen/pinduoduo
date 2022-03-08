@@ -2,8 +2,7 @@ import { Button, Card } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryLoader } from 'react-relay';
 import styled from 'styled-components';
-import { createAccount } from '../api/accounts';
-import { queryOrders, scanOrders } from '../api/orders';
+import { autoOrders, queryOrders, scanOrders } from '../api/orders';
 import { ImportOrderModal } from '../components/ImportOrderModal';
 import { OrderList } from '../components/OrderList';
 
@@ -11,8 +10,7 @@ export const Orders = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [ref, loadOrders] = useQueryLoader(queryOrders);
   const [scan, loading] = useMutation(scanOrders);
-
-  const [fetch] = useMutation(createAccount);
+  const [auto, autoLoading] = useMutation(autoOrders);
 
   useEffect(() => {
     loadOrders({});
@@ -32,6 +30,15 @@ export const Orders = () => {
             onClick={() => scan({ variables: {} })}
           >
             重新扫描所有订单
+          </Button>
+          <Button
+            type='primary'
+            loading={autoLoading}
+            disabled={autoLoading}
+            style={{ marginRight: 8 }}
+            onClick={() => auto({ variables: {} })}
+          >
+            全部下单
           </Button>
         </ActionsWrapper>
       }

@@ -1,4 +1,15 @@
 import { graphql } from 'relay-runtime';
+
+export const autoOrders = graphql`
+  mutation ordersAutoMutation {
+    autoOrder {
+      orders {
+        id
+      }
+    }
+  }
+`;
+
 export const scanOrders = graphql`
   mutation ordersMutation {
     scanOrders {

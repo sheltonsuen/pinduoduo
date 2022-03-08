@@ -1,20 +1,13 @@
 /* SPDX-FileCopyrightText: 2016-present Kriasoft <hello@kriasoft.com> */
 /* SPDX-License-Identifier: MIT */
 
-import {
-  GraphQLBoolean,
-  GraphQLFieldConfig,
-  GraphQLInputObjectType,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString,
-} from "graphql";
-import "knex";
-import { automationOrder } from "../automation/order";
-import { Context } from "../context";
-import db, { Account, Order } from "../db";
-import { OrderType } from "../types/order";
-import { validate, ValidationError } from "../utils";
+import { GraphQLFieldConfig, GraphQLObjectType } from 'graphql';
+import 'knex';
+import { automationOrder } from '../automation/order';
+import { Context } from '../context';
+import db, { Account, Order } from '../db';
+import { OrdersType } from '../types/orders';
+import { validate, ValidationError } from '../utils';
 
 type AutoOrderInput = {
   no?: string | null;
@@ -32,26 +25,16 @@ type AutoOrderInput = {
  *   }
  */
 export const autoOrder: GraphQLFieldConfig<unknown, Context> = {
-  description: "Creates a new",
+  description: 'Creates a new',
 
   type: new GraphQLObjectType({
-    name: "AutoOrderPayload",
+    name: 'AutoOrderPayload',
     fields: {
-      order: { type: OrderType },
+      orders: { type: OrdersType },
     },
   }),
 
-  args: {
-    input: {
-      type: new GraphQLInputObjectType({
-        name: "AutoOrderInput",
-        fields: {
-          no: { type: GraphQLString },
-        },
-      }),
-    },
-    dryRun: { type: new GraphQLNonNull(GraphQLBoolean), defaultValue: false },
-  },
+  args: {},
 
   async resolve(self, args, ctx) {
     const input = args.input as AutoOrderInput;
@@ -59,7 +42,7 @@ export const autoOrder: GraphQLFieldConfig<unknown, Context> = {
 
     // Validate and sanitize user input
     const [data, errors] = validate(input, (value) => ({
-      no: value("no").notEmpty(),
+      no: value('no').notEmpty(),
     }));
 
     if (Object.keys(errors).length > 0) {
@@ -69,20 +52,20 @@ export const autoOrder: GraphQLFieldConfig<unknown, Context> = {
     if (dryRun) return { user: null };
 
     const accounts = await db
-      .table<Account>("accounts")
-      .where("status", "=", "loged")
-      .returning("*");
+      .table<Account>('accounts')
+      .where('status', '=', 'loged')
+      .returning('*');
 
     // TODO: choose one
     const account =
       accounts[Math.floor(Math.random() * accounts.length) % accounts.length];
 
     const [order] = await db
-      .table<Order>("orders")
-      .where("no", "=", data.no as string)
+      .table<Order>('orders')
+      .where('no', '=', data.no as string)
       .select();
 
-    console.log(">>>", accounts, account);
+    console.log('>>>', accounts, account);
 
     await automationOrder(account, order);
     console.log(order);
