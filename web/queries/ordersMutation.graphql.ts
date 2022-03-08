@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2f7bb1ff8ccae3d0bdf12448223f0e81>>
+ * @generated SignedSource<<1d5d3766ddb3d580da30b39f522761e5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,7 +19,6 @@ export type ordersMutation$data = {
   readonly autoOrder: {
     readonly order: {
       readonly id: string;
-      readonly no: string | null;
     } | null;
   } | null;
 };
@@ -65,13 +64,6 @@ v1 = [
             "kind": "ScalarField",
             "name": "id",
             "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "no",
-            "storageKey": null
           }
         ],
         "storageKey": null
@@ -98,16 +90,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "5559515659d9866bf95856ff3e5eac20",
+    "cacheID": "a084063effe5acd3df227598f02b68c4",
     "id": null,
     "metadata": {},
     "name": "ordersMutation",
     "operationKind": "mutation",
-    "text": "mutation ordersMutation(\n  $input: AutoOrderInput!\n) {\n  autoOrder(input: $input) {\n    order {\n      id\n      no\n    }\n  }\n}\n"
+    "text": "mutation ordersMutation(\n  $input: AutoOrderInput!\n) {\n  autoOrder(input: $input) {\n    order {\n      id\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "f36a8c5a5b20b005dd066a1ee53d077d";
+(node as any).hash = "dad6c11eadca81d9a8ddaef6d671496b";
 
 export default node;
