@@ -21,8 +21,8 @@ export async function up(db: Knex) {
     table.string('self_no', 50).notNullable();
     table.string('address').notNullable();
     table.string('spec').notNullable();
-    table.integer('amount').notNullable();
-    table.integer('sales_price').notNullable();
+    table.double('amount').notNullable();
+    table.double('sales_price').notNullable();
     table.string('self_store').notNullable();
     table.string('product').notNullable();
 

@@ -22,21 +22,12 @@ export enum UserActionType {
 export enum Table {
   Accounts = "accounts",
   Identity = "identity",
+  Orders = "orders",
   User = "user",
   UserAction = "user_action",
 }
 
-export type Order = {
-  id: string
-  no: string
-  name: string
-  amount: number
-  price: number
-  track_no: string | null
-  status: string | null
-}
-
-export type Account = {
+export type Accounts = {
   id: string;
   user_id: string | null;
   phone: string;
@@ -54,6 +45,24 @@ export type Identity = {
   credentials: Record<string, unknown>;
   created: Date;
   updated: Date;
+};
+
+export type Orders = {
+  id: string;
+  book_at: Date | null;
+  purchase_account: string | null;
+  book_account: string | null;
+  book_store: string | null;
+  book_price: number | null;
+  track_no: string | null;
+  self_no: string;
+  address: string;
+  spec: string;
+  amount: number;
+  sales_price: number;
+  self_store: string;
+  product: string;
+  status: string;
 };
 
 export type User = {

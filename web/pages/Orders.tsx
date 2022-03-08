@@ -23,7 +23,9 @@ export const Orders = () => {
       style={{ flex: 1 }}
       extra={
         <ActionsWrapper>
-          <Button style={{ marginRight: 8 }}>清除所有</Button>
+          <Button type='primary' style={{ marginRight: 8 }}>
+            重新扫描所有订单
+          </Button>
         </ActionsWrapper>
       }
     >
