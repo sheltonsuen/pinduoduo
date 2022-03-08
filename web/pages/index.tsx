@@ -1,13 +1,13 @@
-import { AppstoreAddOutlined, UsergroupAddOutlined } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
-import { useEffect, useState } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
-import styled from "styled-components";
-import { NavBar } from "../components/NavBar";
-import { Gray } from "../styles/color";
-import { getSelectedMenuFromPath } from "../utils/route";
-import { Accounts } from "./Accounts";
-import { Orders } from "./Orders";
+import { AppstoreAddOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+import { useEffect, useState } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import { NavBar } from '../components/NavBar';
+import { Gray } from '../styles/color';
+import { getSelectedMenuFromPath } from '../utils/route';
+import { Accounts } from './Accounts';
+import { Orders } from './Orders';
 
 export const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -16,7 +16,7 @@ export const Home = () => {
 
   useEffect(() => {
     return history.listen(() =>
-      setSelected(getSelectedMenuFromPath("accounts")),
+      setSelected(getSelectedMenuFromPath('accounts')),
     );
   }, []);
 
@@ -29,24 +29,24 @@ export const Home = () => {
           collapsible
           collapsed={collapsed}
           onCollapse={(v) => setCollapsed(v)}
-          defaultValue="dashboard"
+          defaultValue='dashboard'
         >
           <Menu
-            mode="inline"
+            mode='inline'
             selectedKeys={selected}
             style={{ borderRight: 0 }}
           >
             <Menu.Item
-              key="accounts"
+              key='accounts'
               icon={<UsergroupAddOutlined />}
-              onClick={() => history.push("/accounts")}
+              onClick={() => history.push('/accounts')}
             >
               账户管理
             </Menu.Item>
             <Menu.Item
-              key="orders"
+              key='orders'
               icon={<AppstoreAddOutlined />}
-              onClick={() => history.push("/orders")}
+              onClick={() => history.push('/orders')}
             >
               订单管理
             </Menu.Item>
@@ -55,9 +55,9 @@ export const Home = () => {
         <ContentWrapper>
           <Content>
             <Switch>
-              <Route exact path="/accounts" component={Accounts} />
-              <Route exact path="/orders" component={Orders} />
-              <Route exact path="/" component={Accounts} />
+              <Route exact path='/accounts' component={Accounts} />
+              <Route exact path='/orders' component={Orders} />
+              <Route exact path='/' component={Accounts} />
             </Switch>
           </Content>
         </ContentWrapper>

@@ -20,7 +20,7 @@ export const Orders = () => {
   return (
     <Card
       title='所有订单'
-      style={{ flex: 1 }}
+      style={{ flex: 1, overflow: 'scroll' }}
       extra={
         <ActionsWrapper>
           <Button type='primary' style={{ marginRight: 8 }}>
