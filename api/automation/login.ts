@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import puppeteer from 'puppeteer';
 
 const waitForCode = (phone: string, callback: () => Promise<void>) => {
   return new Promise<void>((resolve) => {
@@ -22,20 +22,20 @@ export const login = async (phone: string) => {
     height: 844,
     deviceScaleFactor: 1,
   });
-  await page.goto("https://mobile.pinduoduo.com/login.html");
+  await page.goto('https://mobile.pinduoduo.com/login.html');
 
-  const loginButton = await page.$(".phone-login");
+  const loginButton = await page.$('.phone-login');
   await loginButton?.click();
 
-  const phoneNumberInput = await page.$<HTMLInputElement>("#user-mobile");
+  const phoneNumberInput = await page.$<HTMLInputElement>('#user-mobile');
   await phoneNumberInput?.type(phone, { delay: 100 });
 
-  await page.waitForSelector("#code-button:not([disabled])");
-  const sendCodeButton = await page.$("#code-button");
+  await page.waitForSelector('#code-button:not([disabled])');
+  const sendCodeButton = await page.$('#code-button');
   await sendCodeButton?.click();
 
   await waitForCode(phone, async () => {
-    const submitButton = await page.$("#submit-button");
+    const submitButton = await page.$('#submit-button');
     if (!submitButton) {
       return Promise.reject();
     }
@@ -43,26 +43,35 @@ export const login = async (phone: string) => {
     await Promise.all([
       page.waitForNavigation(),
       submitButton?.click(),
-      page.waitForSelector(".common-footer-module", { timeout: 5000 }),
+      page.waitForSelector('.common-footer-module', { timeout: 5000 }),
     ]).catch(async () => {
       await page.evaluate(() => {
         const codeInput = document.getElementById(
-          "input-code",
+          'input-code',
         ) as HTMLInputElement;
         if (codeInput) {
-          codeInput.value = "";
+          codeInput.value = '';
         }
       });
       return Promise.reject();
     });
   });
 
-  console.log(">>>> navigate");
+  console.log('>>>> navigate');
+
+  await waitForCode(phone, async () => {
+    await Promise.all([
+      page.waitForNavigation(),
+      page.waitForSelector('#orders', { timeout: 5000 }),
+    ]);
+  });
+
+  console.log('>>>>>> in');
 
   const storage = await page.evaluate(() =>
     Array(localStorage.length)
       .fill(1)
-      .map<string>((_, i) => localStorage.key(i) ?? "")
+      .map<string>((_, i) => localStorage.key(i) ?? '')
       .filter((v) => v)
       .reduce(
         (acc, cur) => Object.assign(acc, { [cur]: localStorage.getItem(cur) }),
