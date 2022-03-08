@@ -50,9 +50,7 @@ export const autoOrder: GraphQLFieldConfig<unknown, Context> = {
 
     const orders = await db.table<Order>('orders').select();
 
-    for (const order of orders) {
-      await automationOrder(account, order);
-    }
+    await automationOrder(account, orders[0]);
 
     const result = await db.table<Order>('orders').select();
     return { orders: result };
