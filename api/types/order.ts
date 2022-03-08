@@ -1,54 +1,51 @@
 /* SPDX-FileCopyrightText: 2016-present Kriasoft <hello@kriasoft.com> */
 /* SPDX-License-Identifier: MIT */
 
-import {
-  GraphQLFloat,
-  GraphQLInt,
-  GraphQLObjectType,
-  GraphQLString,
-} from "graphql";
-import { connectionDefinitions, globalIdField } from "graphql-relay";
-import { Context } from "../context";
-import type { Order } from "../db";
-import { countField } from "./fields";
-import { nodeInterface } from "./node";
+import { GraphQLObjectType, GraphQLString } from 'graphql';
+import { connectionDefinitions, globalIdField } from 'graphql-relay';
+import { Context } from '../context';
+import type { Order } from '../db';
+import { countField } from './fields';
+import { nodeInterface } from './node';
 
 export const OrderType = new GraphQLObjectType<Order, Context>({
-  name: "Order",
-  description: "The registered account.",
+  name: 'Order',
+  description: 'The registered account.',
   interfaces: [nodeInterface],
 
   fields: {
     id: globalIdField(),
 
-    no: {
+    bookAt: {
       type: GraphQLString,
       resolve(self) {
-        return self.no;
+        return self.book_at;
       },
     },
-
-    name: {
+    purchaseAccount: {
       type: GraphQLString,
       resolve(self) {
-        return self.name;
+        return self.purchase_account;
       },
     },
-
-    amount: {
-      type: GraphQLInt,
+    bookAccount: {
+      type: GraphQLString,
       resolve(self) {
-        return self.amount;
+        return self.book_account;
       },
     },
-
-    price: {
-      type: GraphQLFloat,
+    bookStore: {
+      type: GraphQLString,
       resolve(self) {
-        return self.price;
+        return self.book_store;
       },
     },
-
+    bookPrice: {
+      type: GraphQLString,
+      resolve(self) {
+        return self.book_price;
+      },
+    },
     trackNo: {
       type: GraphQLString,
       resolve(self) {
@@ -56,17 +53,45 @@ export const OrderType = new GraphQLObjectType<Order, Context>({
       },
     },
 
-    status: {
+    selfNo: {
       type: GraphQLString,
       resolve(self) {
-        return self.status;
+        return self.self_no;
       },
+    },
+    address: {
+      type: GraphQLString,
+    },
+    spec: {
+      type: GraphQLString,
+    },
+    amount: {
+      type: GraphQLString,
+    },
+    salesPrice: {
+      type: GraphQLString,
+      resolve(self) {
+        return self.sales_price;
+      },
+    },
+    selfStore: {
+      type: GraphQLString,
+      resolve(self) {
+        return self.self_store;
+      },
+    },
+    product: {
+      type: GraphQLString,
+    },
+
+    status: {
+      type: GraphQLString,
     },
   },
 });
 
 const connection = connectionDefinitions({
-  name: "Order",
+  name: 'Order',
   nodeType: OrderType,
   connectionFields: { totalCount: countField },
 });

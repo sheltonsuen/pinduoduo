@@ -107,11 +107,19 @@ enum IdentityProvider {
 type Order implements Node {
   """The ID of an object"""
   id: ID!
-  no: String
-  name: String
-  amount: Int
-  price: Float
+  bookAt: String
+  purchaseAccount: String
+  bookAccount: String
+  bookStore: String
+  bookPrice: String
   trackNo: String
+  selfNo: String
+  address: String
+  spec: String
+  amount: String
+  salesPrice: String
+  selfStore: String
+  product: String
   status: String
 }
 
